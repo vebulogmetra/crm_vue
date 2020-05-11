@@ -60,6 +60,7 @@
 
 <script>
 import {email, required, minLength} from 'vuelidate/lib/validators'
+import msgs from '@/utils/msgs'
 
 export default {
   name: 'login',
@@ -73,6 +74,12 @@ export default {
   validations: {
     email: {email, required}, //required не пустой
     password: {required, minLength: minLength(8)} //ограничитель по миним. длине пароля
+  },
+
+  mounted() {
+    if (msgs[this.$route.query.message]) {
+      this.$pushmsg(msgs[this.$route.query.message])
+    }
   },
 
   methods: {

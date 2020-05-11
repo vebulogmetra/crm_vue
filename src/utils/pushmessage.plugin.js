@@ -7,6 +7,8 @@ export default {
             M.toast({html})
         }
 
-        Vue.prototype.$error
+        Vue.prototype.$pusherror = function(html) {
+            M.toast({html: `[Ошибка]: ${html}`})
+        }
     }
 }
