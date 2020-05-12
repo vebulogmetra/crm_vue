@@ -91,13 +91,13 @@ export default {
 
   validations: {
     email: { email, required }, //required не пустой
-    password: { required, minLength: minLength(8) }, //ограничитель по миним. длине пароля
+    password: { required, minLength: minLength(5) }, //ограничитель по миним. длине пароля
     name: { required },
     agree: { mycheckedval: v => v }
   },
 
   methods: {
-    submitHnd() {
+    async submitHnd() {
       if (this.$v.$invalid) {
         this.$v.$touch();
         return;
@@ -109,7 +109,11 @@ export default {
         name: this.name
       }
 
-      this.$router.push('/')
+      try {
+        await this.$store.dispatch('register', formData)
+        this.$router.push('/')
+      } catch {}
+
     }
   }
 };

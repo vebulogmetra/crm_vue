@@ -73,7 +73,7 @@ export default {
 
   validations: {
     email: {email, required}, //required не пустой
-    password: {required, minLength: minLength(8)} //ограничитель по миним. длине пароля
+    password: {required, minLength: minLength(5)} //ограничитель по миним. длине пароля
   },
 
   mounted() {
@@ -83,7 +83,7 @@ export default {
   },
 
   methods: {
-    submitHnd() {
+    async submitHnd() {
       //если при попытке отправки поле не валидно, тогда return чтоб не отправилась
       //инвалидная формма
       if (this.$v.$invalid) {
@@ -96,7 +96,13 @@ export default {
         password: this.password
       }
 
-      this.$router.push('/')
+      try {
+        await this.$store.dispatch('login', formData)
+        this.$router.push('/')
+
+      } catch (e) {}
+
+
     }
   }
 }
