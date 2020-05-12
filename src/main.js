@@ -4,7 +4,9 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import dateFilter from '@/filters/date.filter'
+import CurrFilter from '@/filters/curr.filter'
 import messPlugin from '@/utils/pushmessage.plugin'
+import Loader from '@/components/app_comp/Loader'
 import './registerServiceWorker'
 import 'materialize-css/dist/js/materialize.min'
 
@@ -22,6 +24,10 @@ Vue.use(messPlugin)
 
 //добавляем фильтр даты datef в глобалку,чтоб дотянуться из Navbar 
 Vue.filter('datef', dateFilter)
+//фильтр валюты
+Vue.filter('currf', CurrFilter)
+
+Vue.component('Loader', Loader)
 
 firebase.initializeApp({
   apiKey: "AIzaSyBigr-vchwuLQAb3BC-KER9DiCt2foUb5I",

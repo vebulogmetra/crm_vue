@@ -10,13 +10,8 @@
 
       <ul class="right hide-on-small-and-down">
         <li>
-          <a  class="dropdown-trigger black-text" 
-              href="#" 
-              data-target="dropdown"
-              ref="ddwn">
-
-            USER NAME
-
+          <a class="dropdown-trigger black-text" href="#" data-target="dropdown" ref="ddwn">
+            {{ name }}
             <i class="material-icons right">arrow_drop_down</i>
           </a>
 
@@ -40,7 +35,7 @@
 </template>
 
 <script>
-import M from 'materialize-css/dist/js/materialize.min'
+import M from "materialize-css/dist/js/materialize.min";
 export default {
   data: () => ({
     date: new Date(),
@@ -50,24 +45,30 @@ export default {
 
   methods: {
     async logout() {
-      await this.$store.dispatch('logout')
-      this.$router.push('/login?message=logout')
+      await this.$store.dispatch("logout");
+      this.$router.push("/login?message=logout");
     }
-},
+  },
+  computed: {
+    //получаем юзернейм
+    name() {
+      return this.$store.getters.info.name
+    } 
+  },
   //когда прогрузилось DOM
   mounted() {
     this.interval = setInterval(() => {
-      this.date = new Date()
-    }, 1000)
-    this.dropdown = M.Dropdown.init(this.$refs.ddwn, {constrainWidth: true})
+      this.date = new Date();
+    }, 1000);
+    this.dropdown = M.Dropdown.init(this.$refs.ddwn, { constrainWidth: true });
   },
   //освобождение памяти (удаление таймера, удаление дд) после закрытия navbar
   beforeDestroy() {
-    clearInterval(this.interval)
+    clearInterval(this.interval);
     //защита от быстрого перехода
     if (this.dropdown && this.dropdown.destroy) {
-      this.dropdown.destroy()
+      this.dropdown.destroy();
     }
   }
-}
+};
 </script>
