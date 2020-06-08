@@ -14,8 +14,8 @@
     </main>
 
     <div class="fixed-action-btn">
-      <router-link lass="btn-floating btn-large blue" to="/record">
-        <i class="large material-icons">add</i>
+      <router-link class="btn-floating btn-large light-blue darken-3" to="/record">
+        <i class="large material-icons">add_circle</i>
       </router-link>
     </div>
   </div>
